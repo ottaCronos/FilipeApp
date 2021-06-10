@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FilipeApp.Models;
 using Newtonsoft.Json;
 
 namespace ConstellationEditor.Models
@@ -6,12 +7,7 @@ namespace ConstellationEditor.Models
     public class GraphData
     {
         public Meta Meta { get; set; }
-        public List<NodeElement> NodeElements { get; set; }
-        public List<NodeProject> NodeProjects { get; set; }
-        public List<NodeCaseStudy> NodeCaseStudies { get; set; }
-        public List<NodePublication> NodePublications { get; set; }
-        public List<NodeCountry> NodeCountries { get; set; }
-        public List<NodeVt> NodeVts { get; set; }
+        public List<PlacedItem> Elements { get; set; }
         public List<EdgeItem> EdgeItems { get; set; }
     }
 
@@ -69,68 +65,6 @@ namespace ConstellationEditor.Models
         [JsonProperty("object")]
         public string Object { get; set; }
         public int weight { get; set; }
-    }
-    
-    public class NodeProject
-    {
-        public string name { get; set; }
-        public string type { get; set; }
-        public string label { get; set; }
-        public NodeProjectMeta meta { get; set; }
-    }
-    
-    public class NodeProjectMeta
-    {
-        public string description { get; set; }
-        public string link { get; set; }
-    }
-    
-    public class NodeCaseStudy
-    {
-        public string name { get; set; }
-        public string type { get; set; }
-        public string label { get; set; }
-        public NodeCaseStudyMeta meta { get; set; }
-    }
-    
-    public class NodeCaseStudyMeta
-    {
-        public string description { get; set; }
-        public string link { get; set; }
-        public NodeIcon icon { get; set; }
-        public List<NodeImage> images { get; set; }
-    }
-    
-    public class NodePublication
-    {
-        public string name { get; set; }
-        public string type { get; set; }
-        public string label { get; set; }
-        public NodePublicationMeta meta { get; set; }
-    }
-    
-    public class NodePublicationMeta
-    {
-        public string description { get; set; }
-        public string language { get; set; }
-        public string link { get; set; }
-        public string paper { get; set; }
-        public string[] keywords { get; set; }
-    }
-
-    public class NodeCountry
-    {
-        public string name { get; set; }
-        public string type { get; set; }
-        public string label { get; set; }
-    }
-    
-    public class NodeVt
-    {
-        public string name { get; set; }
-        public string type { get; set; }
-        public string label { get; set; }
-        public string group { get; set; }
     }
 
 }

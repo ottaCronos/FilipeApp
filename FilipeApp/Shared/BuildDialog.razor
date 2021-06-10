@@ -1,104 +1,33 @@
 @using Microsoft.AspNetCore.Components
-@using FilipeApp.Models
+@using System.IO
 @using FilipeApp.Services
+
 <MudDialog>
     <DialogContent>
-        <MudText Class="mx-2" Typo="Typo.caption"><b>Basics</b></MudText>
-        <MudTextField @bind-Value="model.Name" Class="mx-2" Label="Name" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
-        <MudTextField @bind-Value="model.Label" Class="mx-2" Label="Label" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
-        <MudText Class="mx-2" Typo="Typo.caption"><b>Meta</b></MudText>
-        <MudTextField @bind-Value="model.Description" Class="mx-2" Label="Description" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
-        @if (model.IconImported) {
-            <MudButton Class="mx-2" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Success">Icon imported</MudButton>
-        } else {
-            <MudButton Class="mx-2" Size="Size.Small" Variant="Variant.Outlined" OnClick="ImportIcon">Import Icon</MudButton>
-        } @if (model.ImageImported) {
-            <MudButton Class="mx-2" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Success">Image imported</MudButton>
-        } else {
-            <MudButton Class="mx-2" Size="Size.Small" Variant="Variant.Outlined" OnClick="ImportImage">Import Image</MudButton>
-        }
-        <MudTextField @bind-Value="model.Link" Class="mx-2" Label="Link" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
-        <MudText Class="mx-2" Typo="Typo.caption"><b>Linked elements</b></MudText>
-        <MudTreeView Class="mx-2" T="string">
-            <MudTreeViewItem Value='"Elements"'>
-                @foreach (var item in model.LinkedElements) {
-                    <MudTreeViewItem Value="@item"/>
-                }
-            </MudTreeViewItem>
-        </MudTreeView>
-        <MudText Class="mx-2" Typo="Typo.caption"><b>Add linked element</b></MudText>
-        <MudSelect @bind-Value="selectedElement" Class="mx-2" T="string" Label="Elements" Strict="true" Variant="Variant.Outlined" Dense="true">
-            @foreach (var item in Global.PlacedItems) {
-                <MudSelectItem T="string" Value="@item.name"/>
-            }
-        </MudSelect>
-        @if (!string.IsNullOrEmpty(selectedElement)) {
-            <MudButton Class="mx-2" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default" OnClick="LinkElement">Link this element</MudButton>
-        } else {
-            <MudButton Class="mx-2" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Default" Disabled="true">Link this element</MudButton>
-        }
+        <MudText Class="mx-2" Typo="Typo.caption"><b>Output filename</b></MudText>
+        <MudTextField @bind-Value="filename" Class="mx-2" Placeholder='"filename"' Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudButton Color="Color.Primary" OnClick="Submit">Add</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Build & Download</MudButton>
     </DialogActions>
 </MudDialog>
 
 
 @code {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    string filename = String.Empty;
     
-    ElementSubmit model = new();
-    string selectedElement;
-    
-    void LinkElement()
+    async void Submit()
     {
-        if(!model.LinkedElements.Contains(selectedElement))
-            model.LinkedElements.Add(selectedElement);
-        StateHasChanged();
-    }
-    
-    void Submit()
-    {
-        var item = new PlacedItem()
-        {
-            name = model.Name, label = model.Label, typeNode = "test", all_linked_elements = model.LinkedElements,
-            metadata = new() {
-                description = model.Description, icon = new() { large = model.Icon, small = model.Icon },
-                link = model.Link, images = new []{ new NodeMedia() { url = model.Image }}
-            }
-        };
-        DataService.AddItem(item);
-        Snackbar.Add("Modifications saved on the server !", Severity.Success);
+        var data = await DataService.Build();
+        await Js.InvokeVoidAsync(
+            "saveAsFile",
+            $"{filename}.zip",
+            Convert.ToBase64String(data));
+        Snackbar.Add("File builded & downloaded !", Severity.Success);
         MudDialog.Close(DialogResult.Ok(true));
     }
     void Cancel() => MudDialog.Cancel();
-    
-    
-    async void ImportIcon()
-    {
-        var dialog = DialogService.Show<ImageImportDialog>();
-        var result = await dialog.Result;
 
-        if (!result.Cancelled)
-        {
-            model.Icon = result.Data.ToString();
-            model.IconImported = true;
-            StateHasChanged();
-        }
-    }
-    
-    async void ImportImage()
-    {
-        var dialog = DialogService.Show<ImageImportDialog>();
-        var result = await dialog.Result;
-
-        if (!result.Cancelled)
-        {
-            model.Image = result.Data.ToString();
-            model.ImageImported = true;
-            StateHasChanged();
-        }
-    }
-    
 }

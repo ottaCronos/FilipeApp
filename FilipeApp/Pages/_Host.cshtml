@@ -1,0 +1,80 @@
+﻿@page "/"
+@namespace FilipeApp.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>FilipeApp</title>
+    <base href="~/"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link href="css/site.css" rel="stylesheet"/>
+    <link href="FilipeApp.styles.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    
+    <!-- Analytics -->
+    <script src="./dive/common/app/js/analytics.js"></script>
+
+    <!-- Sharing -->
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5c0122c64b87f6001159588d&product=custom-share-buttons' async='async'></script>
+
+    <!-- Styling -->
+    <link href="./dive/common/vendor/css/glide.core.min.css" rel="stylesheet">
+    <link href="./dive/common/vendor/css/glide.theme.min.css" rel="stylesheet">
+    <link href="./dive/common/app/css/style.css" rel="stylesheet">
+    <link href="./dive/common/app/css/modal.css" rel="stylesheet">
+    <link href="./dive/common/app/css/unesco-modal-intro.css" rel="stylesheet">
+    <link href="./dive/common/app/css/unesco-modal-node.css" rel="stylesheet">
+    <link href="./dive/common/app/css/unesco-modal-search.css" rel="stylesheet">
+    <link href="./dive/common/app/css/unesco-modal-legend.css" rel="stylesheet">
+    <link href="./dive/common/app/css/menu.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif&amp;family=Oswald:wght@200;300;400;500&amp;display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bae31afa51.js" crossorigin="anonymous"></script>
+
+    <!-- JavaScript files -->
+    <script src="./dive/common/vendor/js/d3.v5.min.js"></script>
+    <script src="./dive/common/vendor/js/jLouvain.js"></script>
+    <script src="./dive/common/vendor/js/modal.min.js"></script>
+    <script src="./dive/common/vendor/js/fontfaceobserver.js"></script>
+    <script src="./dive/common/vendor/js/lunr.js"></script>
+    <script src="./dive/common/vendor/js/search-params-polyfill.js"></script>
+    <script src="./dive/common/vendor/js/glide.min.js"></script>
+    <script src="./dive/common/app/js/translations.js"></script>
+    <script src="./dive/common/app/js/search.js"></script>
+    <script src="./dive/common/app/js/graph.js"></script>
+    <script src="./dive/common/app/js/unesco-modal-node.js"></script>
+    <script src="./dive/data/version.js"></script>
+
+    <!-- The visual function -->
+    <script src="./js/createConstellationVisual.js"></script>
+    <script src="./js/translationsConstellation.js"></script>
+    <script src="./js/main.js"></script>
+</head>
+<body>
+<component type="typeof(App)" render-mode="ServerPrerendered"/>
+
+<div id="blazor-error-ui">
+    <environment include="Staging,Production">
+        An error has occurred. This application may no longer respond until reloaded.
+    </environment>
+    <environment include="Development">
+        An unhandled exception has occurred. See browser dev tools for details.
+    </environment>
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+<script src="_framework/blazor.server.js"></script>
+<script src="_content/MudBlazor/MudBlazor.min.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

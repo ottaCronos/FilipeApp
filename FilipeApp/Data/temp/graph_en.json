@@ -6,7 +6,7 @@
   "nodes": {
     "test_name1": {
       "name": "test_name1",
-      "typeNode": "element",
+      "typeNode": "test",
       "group": "unesco",
       "label": "label1",
       "metadata": {
@@ -33,7 +33,7 @@
     },
     "test_name2": {
       "name": "test_name2",
-      "typeNode": "element",
+      "typeNode": "test",
       "group": "unesco",
       "label": "test",
       "metadata": {
@@ -59,6 +59,35 @@
       "all_linked_elements": [
         "test_name1"
       ]
+    },
+    "3rdElement": {
+      "name": "3rdElement",
+      "typeNode": "element",
+      "group": "unesco",
+      "label": "Wow label",
+      "metadata": {
+        "icon": {
+          "small": null,
+          "large": null
+        },
+        "description": "Wow desc",
+        "list": "LR",
+        "year": null,
+        "multinational": "EN",
+        "link": null,
+        "images": [
+          {
+            "url": null,
+            "copyright": null,
+            "title": null
+          }
+        ],
+        "videos": null,
+        "sustainability": null
+      },
+      "all_linked_elements": [
+        "test_name1"
+      ]
     }
   },
   "edges": [
@@ -66,6 +95,12 @@
       "subject": "test_name1",
       "predicate": "related",
       "object": "test_name2",
+      "weight": 2
+    },
+    {
+      "subject": "test_name1",
+      "predicate": "related",
+      "object": "3rdElement",
       "weight": 2
     }
   ]

@@ -84,7 +84,7 @@ if (hide.includes('nav')) document.getElementById('navigation').style.display = 
 //////////////////////// Legend setup ////////////////////////
 //////////////////////////////////////////////////////////////
 
-document.getElementById('modal-legend-img').setAttribute('src', 'img/Legend-Constellation_' + language + '.png');
+document.getElementById('modal-legend-img').setAttribute('src', '../img/Legend-Constellation_' + language + '.png');
 
 //////////////////////////////////////////////////////////////
 ////////////////////// Switch language ///////////////////////
@@ -205,9 +205,9 @@ let constellationVisual = createConstellationVisual()
 let font1 = new FontFaceObserver("Oswald", { weight: 300 })
 
 let promises = []
-promises.push(d3.json("./dive/data/graph_" + language + ".json"))
+promises.push(d3.json("../dive/data/graph_" + language + ".json"))
 //Use this when you have a node-locations.json file and don't need to redo the simulation
-if(!simulation) promises.push(d3.json("./dive/data/constellation-node-locations.json"))
+if(!simulation) promises.push(d3.json("../dive/data/constellation-node-locations.json"))
 promises.push(font1.load())
 
 // Expose the graph object

@@ -1,5 +1,82 @@
-<h3>ImageImportDialog</h3>
+@using FilipeApp.Models
+@using FilipeApp.Services
+
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Image" Class="mr-3 mb-n1"/>
+            Import Image
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudContainer Class="d-flex flex-row">
+            <MudText Class="mx-1" Typo="Typo.caption">Import from computer</MudText>
+            <MudSwitch @bind-Checked="@UrlImport" />
+            <MudText Class="mx-1" Typo="Typo.caption">Import from url</MudText>
+        </MudContainer>
+        @if (UrlImport)
+        {
+            <MudTextField @bind-Value="ImageUrl" FullWidth="true" Immediate="true" Label="Image url" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+            @if (ImageLoaded)
+            {
+                <MudCard>
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.body1">Image Preview</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardMedia Image="@ImageUrl" />
+                </MudCard>
+            } else {
+                <MudText><b>Please, enter a valid image url...</b></MudText>
+            }
+        }
+        @if (IsLoading)
+        {
+            <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        @if (ImageLoaded) {
+            <MudButton Color="Color.Info" OnClick="ImportImage">Import</MudButton>
+        } else {
+            <MudButton Color="Color.Info" Disabled="true">Import</MudButton>
+        }
+    </DialogActions>
+</MudDialog>
+
 
 @code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    bool UrlImport { get; set; } = true;
+    bool ImageLoaded { get; set; }
+    bool IsLoading { get; set; }
     
+    string _imageUrl = String.Empty;
+    string ImageUrl
+    {
+        get => _imageUrl;
+        set
+        {
+            _imageUrl = value;
+            if (ImageService.CheckUrl(value))
+                ImageLoaded = true;
+            else ImageLoaded = false;
+        }
+    }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private void ImportImage()
+    {
+        IsLoading = true;
+        string result = ImageService.ImportImage(ImageUrl);
+        MudDialog.Close(DialogResult.Ok(result));
+    }
 }

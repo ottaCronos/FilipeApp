@@ -4,28 +4,28 @@
 
 <MudDialog>
     <DialogContent>
-        <MudText Class="mx-2" Typo="Typo.caption"><b>Output filename</b></MudText>
-        <MudTextField @bind-Value="filename" Class="mx-2" Placeholder='"filename"' Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+        <MudText Class="mx-2" Typo="Typo.caption"><b>Element to remove</b></MudText>
+        <MudSelect @bind-Value="selected" T="string" Label="Element" Strict="true" Variant="Variant.Outlined">
+            @foreach (var item in Global.PlacedItems) {
+                <MudSelectItem T="string" Value="@item.name">@item.name</MudSelectItem>
+            }
+        </MudSelect>
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudButton Color="Color.Primary" OnClick="Submit">Build & Download</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Remove</MudButton>
     </DialogActions>
 </MudDialog>
 
 
 @code {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-    string filename = String.Empty;
+    string selected = String.Empty;
     
-    async void Submit()
-    {
-        var data = await DataService.Build();
-        await Js.InvokeVoidAsync(
-            "saveAsFile",
-            $"{filename}.zip",
-            Convert.ToBase64String(data));
-        Snackbar.Add("File builded & downloaded !", Severity.Success);
+    void Submit() {
+        var item = Global.PlacedItems.Find(x => x.name == selected);
+        DataService.RemoveItem(item);
+        Snackbar.Add("Modifications saved on the server !", Severity.Success);
         MudDialog.Close(DialogResult.Ok(true));
     }
     void Cancel() => MudDialog.Cancel();

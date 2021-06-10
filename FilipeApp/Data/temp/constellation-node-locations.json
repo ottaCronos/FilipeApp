@@ -1,0 +1,16 @@
+[
+
+{"id":"test_name1","community":1,"degree":150,"x_fixed":-232,"y_fixed":-610},
+
+{"id":"test_name2","community":1,"degree":150,"x_fixed":252,"y_fixed":-546},
+
+{"id":"3rdElement","community":1,"degree":150,"x_fixed":-505,"y_fixed":-757},
+
+{"id":"test_name1","community":1,"degree":150,"x_fixed":-581,"y_fixed":885},
+
+{"id":"test_name2","community":1,"degree":150,"x_fixed":527,"y_fixed":-656},
+
+{"id":"3rdElement","community":1,"degree":150,"x_fixed":171,"y_fixed":578},
+
+]
+

@@ -69,26 +69,8 @@ namespace ontoUcmd.Services
                         AffectPlace(c);
                         allConcept.Add(c);
                     }
-                    else if (line.Contains(".") && !line.Contains(":"))
-                    {
-                        string lu = line.Split('.')[0];
-                        string name = line.Split('.')[1].Replace(";", "");
-                        Console.WriteLine($"item  {lu} {name}");
-                        for (int i = 1; i < allTypeRead.Length; i++)
-                        {
-                            if (lu.Equals(allType[i], StringComparison.CurrentCultureIgnoreCase))
-                            {
-                                PlacedItem pi = new PlacedItem();
-                                pi.name = name;
-                                AffectPlace(pi);
-                                allTypeRead[i].Add(pi);
-                            }
-                        }
-                    }
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"[Error] {ex.ToString()}");
                 Console.ForegroundColor = ConsoleColor.Gray;

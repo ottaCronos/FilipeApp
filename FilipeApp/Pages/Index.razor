@@ -1,0 +1,83 @@
+﻿@page "/"
+@using FilipeApp.Models
+@using System.Data
+
+<MudToolBar>
+    <MudIconButton Icon="@Icons.Material.Outlined.Save" Class="mr-5" />
+    <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="AddElement" />
+    <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
+    <MudIconButton Icon="@Icons.Material.Outlined.Remove" OnClick="RemoveElement" />
+    <MudToolBarSpacer />
+    <MudIconButton Icon="@Icons.Material.Outlined.Settings" />
+    <MudIconButton Icon="@Icons.Material.Outlined.CloudDownload" OnClick="BuildDownload" />
+    @if (preview is not null) {
+        <MudIconButton Icon="@Icons.Material.Outlined.Refresh" OnClick="preview.Reload" />
+    }
+    <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" />
+    <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" />
+</MudToolBar>
+
+<MudTabs Class="mx-5  mb-2 mt-2" Elevation="4" Rounded="true" AlwaysShowScrollButtons="true" Color="@Color.Info">
+    <MudTabPanel Text="Editor">
+        <MudSimpleTable Dense="@settings.Dense" Hover="true" Bordered="@settings.Bordered" Striped="true" Style="overflow-x: auto;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Label</th>
+                    <th>Description</th>
+                    <th>Link</th>
+                    <th>Icon</th>
+                    <th>Images</th>
+                    <th>Linked Elements</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Global.PlacedItems) {
+                <tr>
+                    <th>@item.name</th>
+                    <th>@item.typeNode</th>
+                    <th>@item.label</th>
+                    <th>@item.metadata.description</th>
+                    <th>@item.metadata.link</th>
+                    <th>@item.metadata.icon.large</th>
+                    <th>
+                        @if (item.metadata.images != null && item.metadata.images.Length > 0) {
+                            @foreach (var img in item.metadata.images) {
+                                <text>@img.url /</text>   
+                            }
+                        } else {
+                            <text>No image</text>
+                        }
+                    </th>
+                    <th></th>
+                </tr>
+            }
+            </tbody>
+        </MudSimpleTable>
+    </MudTabPanel>
+    <MudTabPanel Text="Live Preview">
+        <PreviewComponant @ref="preview"></PreviewComponant>
+    </MudTabPanel>
+</MudTabs>
+
+
+@code{
+
+    AppSettings settings = new();
+    PreviewComponant preview;
+    
+    void AddElement() => DialogService.Show<AddElementDialog>();
+    void RemoveElement() => DialogService.Show<RemoveDialog>();
+    void BuildDownload() => DialogService.Show<BuildDialog>();
+
+    protected override void OnInitialized() => Update();
+
+    async void Update() {
+        while (true) {
+            await Task.Delay(1000);
+            StateHasChanged();
+        }
+    }
+
+}
