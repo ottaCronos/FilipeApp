@@ -1,0 +1,33 @@
+@using Microsoft.AspNetCore.Components
+@using System.IO
+@using FilipeApp.Services
+
+<MudDialog>
+    <DialogContent>
+        <MudText Class="mx-2" Typo="Typo.caption"><b>Output filename</b></MudText>
+        <MudTextField @bind-Value="filename" Class="mx-2" Placeholder='"filename"' Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Build & Download</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    string filename = String.Empty;
+    
+    async void Submit()
+    {
+        var data = await DataService.Build();
+        await Js.InvokeVoidAsync(
+            "saveAsFile",
+            $"{filename}.zip",
+            Convert.ToBase64String(data));
+        Snackbar.Add("File builded & downloaded !", Severity.Success);
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+    void Cancel() => MudDialog.Cancel();
+
+}
