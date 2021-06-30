@@ -1,80 +1,24 @@
 {
   "meta": {
-    "language": "en",
+    "langage": "en",
     "generated": "Generated with FilipeApp"
   },
   "nodes": {
-    "test_name1": {
-      "name": "test_name1",
-      "typeNode": "test",
+    "TestIcon": {
+      "name": "TestIcon",
+      "type": "element",
       "group": "unesco",
-      "label": "label1",
+      "label": "Test d'une icone",
       "metadata": {
         "icon": {
-          "small": null,
-          "large": null
+          "small": "/imports/1176.png",
+          "large": "/imports/1176.png"
         },
-        "description": "desc1",
+        "description": "La description",
         "list": "LR",
         "year": null,
         "multinational": "EN",
-        "link": "https://",
-        "images": [
-          {
-            "url": "/imports/10x-featured-social-media-image-size.png",
-            "copyright": null,
-            "title": null
-          }
-        ],
-        "videos": null,
-        "sustainability": null
-      },
-      "all_linked_elements": []
-    },
-    "test_name2": {
-      "name": "test_name2",
-      "typeNode": "test",
-      "group": "unesco",
-      "label": "test",
-      "metadata": {
-        "icon": {
-          "small": null,
-          "large": null
-        },
-        "description": "desc2",
-        "list": "LR",
-        "year": null,
-        "multinational": "EN",
-        "link": "http://",
-        "images": [
-          {
-            "url": "/imports/10x-featured-social-media-image-size.png",
-            "copyright": null,
-            "title": null
-          }
-        ],
-        "videos": null,
-        "sustainability": null
-      },
-      "all_linked_elements": [
-        "test_name1"
-      ]
-    },
-    "3rdElement": {
-      "name": "3rdElement",
-      "typeNode": "element",
-      "group": "unesco",
-      "label": "Wow label",
-      "metadata": {
-        "icon": {
-          "small": null,
-          "large": null
-        },
-        "description": "Wow desc",
-        "list": "LR",
-        "year": null,
-        "multinational": "EN",
-        "link": null,
+        "link": "https://flaticon.com",
         "images": [
           {
             "url": null,
@@ -85,22 +29,128 @@
         "videos": null,
         "sustainability": null
       },
-      "all_linked_elements": [
-        "test_name1"
+      "all_linked_node": [
+        "TestImage"
+      ]
+    },
+    "TestImage": {
+      "name": "TestImage",
+      "type": "element",
+      "group": "unesco",
+      "label": "Test d'une image",
+      "metadata": {
+        "icon": {
+          "small": null,
+          "large": null
+        },
+        "description": "Description",
+        "list": "LR",
+        "year": null,
+        "multinational": "EN",
+        "link": "https://google.com",
+        "images": [
+          {
+            "url": "/imports/1041728.png",
+            "copyright": null,
+            "title": null
+          }
+        ],
+        "videos": null,
+        "sustainability": null
+      },
+      "all_linked_node": [
+        "TestIcon"
+      ]
+    },
+    "MyFirstConcept": {
+      "name": "MyFirstConcept",
+      "type": "concept",
+      "group": "unesco",
+      "label": "My First Concept !!",
+      "metadata": {
+        "icon": {
+          "small": null,
+          "large": null
+        },
+        "description": "I love descriptions. This concept is linked to 2 elements.",
+        "list": "LR",
+        "year": null,
+        "multinational": "EN",
+        "link": "http://movie.com",
+        "images": [
+          {
+            "url": null,
+            "copyright": null,
+            "title": null
+          }
+        ],
+        "videos": null,
+        "sustainability": null
+      },
+      "all_linked_node": [
+        "TestImage",
+        "TestIcon"
+      ]
+    },
+    "FotoPro": {
+      "name": "FotoPro",
+      "type": "photograph",
+      "group": "unesco",
+      "label": "A random photograph",
+      "metadata": {
+        "icon": {
+          "small": null,
+          "large": null
+        },
+        "description": "Nobody knows who is hiding behind the camera...",
+        "list": "LR",
+        "year": null,
+        "multinational": "EN",
+        "link": "https://foto.pro/long/link/support",
+        "images": [
+          {
+            "url": null,
+            "copyright": null,
+            "title": null
+          }
+        ],
+        "videos": null,
+        "sustainability": null
+      },
+      "all_linked_node": [
+        "MyFirstConcept"
       ]
     }
   },
   "edges": [
     {
-      "subject": "test_name1",
+      "subject": "TestImage",
       "predicate": "related",
-      "object": "test_name2",
+      "object": "TestIcon",
       "weight": 2
     },
     {
-      "subject": "test_name1",
+      "subject": "TestIcon",
       "predicate": "related",
-      "object": "3rdElement",
+      "object": "TestImage",
+      "weight": 2
+    },
+    {
+      "subject": "TestImage",
+      "predicate": "related",
+      "object": "MyFirstConcept",
+      "weight": 2
+    },
+    {
+      "subject": "TestIcon",
+      "predicate": "related",
+      "object": "MyFirstConcept",
+      "weight": 2
+    },
+    {
+      "subject": "MyFirstConcept",
+      "predicate": "related",
+      "object": "FotoPro",
       "weight": 2
     }
   ]

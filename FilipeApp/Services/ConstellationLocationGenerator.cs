@@ -119,7 +119,8 @@ namespace ontoUcmd.Services
                     for (int j = 0; j < allTypeRead[i].Count; j++)
                     {
                         PlacedItem pj = allTypeRead[i][j];
-                        if (i == allTypeRead.Length - 1 && j == allTypeRead[i].Count - 1)
+                        
+                        if (j == allTypeRead[i].Count - 1)
                             fo.WriteLine(pj.ToString(i + 1, 150) + crlf);
                         else
                             fo.WriteLine(pj.ToString(i + 1, 150) + "," + crlf);

@@ -5,11 +5,11 @@ namespace FilipeApp.Models
     public class PlacedItem
     {
         public string name { get; set; }
-        public string typeNode { get; set; }
+        public string type { get; set; }
         public string group { get; set; } = "unesco";
         public string label { get; set; }
         public NodeMeta metadata { get; set; }
-        public List<string> all_linked_elements { get; set; }
+        public List<string> all_linked_node { get; set; }
     }
 
     public class NodeIcon

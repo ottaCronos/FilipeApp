@@ -683,7 +683,7 @@ function createConstellationVisual() {
 
     function calculateNodeSettings() {
         // let linked_nodes
-        latest_year = d3.max(nodes.filter(d => d.type === "element"), d => d.meta.year)
+        latest_year = d3.max(nodes.filter(d => d.type === "element"), d => d.metadata.year)
 
         nodes.forEach(d => {
             //Only redo this if this is there's not yet a degree known (from the simulation), because it takes a long time
@@ -2202,7 +2202,7 @@ function createConstellationVisual() {
         if(opacity) ctx.globalAlpha = opacity
 
         //If this is an element from the most recent year, make a black "outline"
-        if(d.type === "element" && d.meta.year === latest_year) {
+        if(d.type === "element" && d.metadata.year === latest_year) {
             ctx.beginPath()
             ctx.strokeStyle = "black"
             ctx.lineWidth = d.stroke_width / 2

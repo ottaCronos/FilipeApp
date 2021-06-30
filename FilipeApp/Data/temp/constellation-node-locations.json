@@ -1,16 +1,12 @@
 [
 
-{"id":"test_name1","community":1,"degree":150,"x_fixed":-232,"y_fixed":-610},
+{"id":"TestIcon","community":1,"degree":150,"x_fixed":-67,"y_fixed":359},
 
-{"id":"test_name2","community":1,"degree":150,"x_fixed":252,"y_fixed":-546},
+{"id":"TestImage","community":1,"degree":150,"x_fixed":-657,"y_fixed":-741},
 
-{"id":"3rdElement","community":1,"degree":150,"x_fixed":-505,"y_fixed":-757},
+{"id":"MyFirstConcept","community":1,"degree":150,"x_fixed":759,"y_fixed":-318},
 
-{"id":"test_name1","community":1,"degree":150,"x_fixed":-581,"y_fixed":885},
-
-{"id":"test_name2","community":1,"degree":150,"x_fixed":527,"y_fixed":-656},
-
-{"id":"3rdElement","community":1,"degree":150,"x_fixed":171,"y_fixed":578},
+{"id":"FotoPro","community":1,"degree":150,"x_fixed":-516,"y_fixed":769}
 
 ]
 

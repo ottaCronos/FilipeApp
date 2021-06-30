@@ -1,3 +1,4 @@
-element.test_name1:0;
-element.test_name2:1;
-element.3rdElement:1;
+element.TestIcon:1;
+element.TestImage:1;
+element.MyFirstConcept:2;
+element.FotoPro:1;

@@ -1,8 +1,12 @@
 [
 
-{"id":"test_name1","community":1,"degree":150,"x_fixed":156,"y_fixed":-573},
+{"id":"test_name1","community":1,"degree":150,"x_fixed":12,"y_fixed":424},
 
-{"id":"test_name2","community":1,"degree":150,"x_fixed":739,"y_fixed":-400}
+{"id":"test_name2","community":1,"degree":150,"x_fixed":645,"y_fixed":-184},
+
+{"id":"3rdElement","community":1,"degree":150,"x_fixed":-215,"y_fixed":-338},
+
+{"id":"another_test","community":1,"degree":150,"x_fixed":291,"y_fixed":-305}
 
 ]
 

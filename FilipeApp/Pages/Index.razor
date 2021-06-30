@@ -1,20 +1,15 @@
 ﻿@page "/"
 @using FilipeApp.Models
-@using System.Data
 
 <MudToolBar>
-    <MudIconButton Icon="@Icons.Material.Outlined.Save" Class="mr-5" />
     <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="AddElement" />
     <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
     <MudIconButton Icon="@Icons.Material.Outlined.Remove" OnClick="RemoveElement" />
     <MudToolBarSpacer />
-    <MudIconButton Icon="@Icons.Material.Outlined.Settings" />
     <MudIconButton Icon="@Icons.Material.Outlined.CloudDownload" OnClick="BuildDownload" />
     @if (preview is not null) {
         <MudIconButton Icon="@Icons.Material.Outlined.Refresh" OnClick="preview.Reload" />
     }
-    <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" />
-    <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" />
 </MudToolBar>
 
 <MudTabs Class="mx-5  mb-2 mt-2" Elevation="4" Rounded="true" AlwaysShowScrollButtons="true" Color="@Color.Info">
@@ -33,10 +28,12 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach (var item in Global.PlacedItems) {
-                <tr>
+            @foreach (var item in Global.PlacedItems)
+            {
+                PlacedItem pitem = item;
+                <tr @ondblclick="() => EditElement(pitem)">
                     <th>@item.name</th>
-                    <th>@item.typeNode</th>
+                    <th>@item.type</th>
                     <th>@item.label</th>
                     <th>@item.metadata.description</th>
                     <th>@item.metadata.link</th>
@@ -50,7 +47,19 @@
                             <text>No image</text>
                         }
                     </th>
-                    <th></th>
+                    <th>
+                        @if (item.all_linked_node is {Count: > 0 })
+                        {
+                            foreach (var linkedElement in item.all_linked_node)
+                            {
+                                if (item.all_linked_node.Last() == linkedElement) {
+                                    <text>@linkedElement</text>
+                                } else {
+                                    <text>@linkedElement / </text>
+                                }
+                            }
+                        }
+                    </th>
                 </tr>
             }
             </tbody>
@@ -66,10 +75,19 @@
 
     AppSettings settings = new();
     PreviewComponant preview;
-    
-    void AddElement() => DialogService.Show<AddElementDialog>();
+    DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true };
+
+    void AddElement() => DialogService.Show<AddElementDialog>("Add an element", maxWidth);
     void RemoveElement() => DialogService.Show<RemoveDialog>();
     void BuildDownload() => DialogService.Show<BuildDialog>();
+
+    void EditElement(PlacedItem item)
+    {
+        Console.WriteLine($"{item}");
+        var parameters = new DialogParameters();
+        parameters.Add("DefaultElement", item);
+        DialogService.Show<AddElementDialog>("Edit an element", parameters, maxWidth);
+    }
 
     protected override void OnInitialized() => Update();
 

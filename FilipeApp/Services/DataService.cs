@@ -53,7 +53,7 @@ namespace FilipeApp.Services
             if(File.Exists($"{dataPath}/output.zip"))
                 File.Delete($"{dataPath}/output.zip");
             if(File.Exists($"{path}/imports.zip"))
-                File.Delete($"{dataPath}/imports.zip");
+                File.Delete($"{path}/imports.zip");
             
             await Task.Run(() => {
                 ZipFile.CreateFromDirectory($"{Environment.CurrentDirectory}/wwwroot/imports", $"{path}/imports.zip");

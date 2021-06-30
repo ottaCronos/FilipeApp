@@ -13,7 +13,7 @@ namespace ConstellationEditor.Models
 
     public class Meta
     {
-        public string language { get; set; }
+        public string langage { get; set; }
         public string generated { get; set; }
     }
 

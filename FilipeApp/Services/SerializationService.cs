@@ -14,11 +14,11 @@ namespace FilipeApp.Services
         public static async Task<GraphData> ConvertToGraphData(List<PlacedItem> elements) {
             List<EdgeItem> edgeItems = new List<EdgeItem>();
             foreach (var element in elements) {
-                    foreach (var s in element.all_linked_elements) { edgeItems.Add(new EdgeItem() { Object = element.name, predicate = "related", subject = s, weight = 2}); }
+                    foreach (var s in element.all_linked_node) { edgeItems.Add(new EdgeItem() { Object = element.name, predicate = "related", subject = s, weight = 2}); }
             }
             
             GraphData graphData = new GraphData() {
-                Meta = new Meta() {generated = "Generated with FilipeApp", language = "en"},
+                Meta = new Meta() {generated = "Generated with FilipeApp", langage = "en"},
                 Elements = elements, EdgeItems = edgeItems
             };
 
@@ -47,7 +47,7 @@ namespace FilipeApp.Services
             string outputText = "";
             foreach (var element in graphData.Elements)
             {
-                List<string> items = element.all_linked_elements;
+                List<string> items = element.all_linked_node;
                 int linkedCount = 0;
                 if (items.Count > 0)
                     linkedCount = items.Count;

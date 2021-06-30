@@ -1,12 +1,12 @@
 {
   "meta": {
-    "language": "en",
+    "langage": "en",
     "generated": "Generated with FilipeApp"
   },
   "nodes": {
     "test_name1": {
       "name": "test_name1",
-      "typeNode": "element",
+      "type": "element",
       "group": "unesco",
       "label": "label1",
       "metadata": {
@@ -29,11 +29,11 @@
         "videos": null,
         "sustainability": null
       },
-      "all_linked_elements": []
+      "all_linked_node": []
     },
     "test_name2": {
       "name": "test_name2",
-      "typeNode": "element",
+      "type": "element",
       "group": "unesco",
       "label": "test",
       "metadata": {
@@ -56,8 +56,67 @@
         "videos": null,
         "sustainability": null
       },
-      "all_linked_elements": [
+      "all_linked_node": [
         "test_name1"
+      ]
+    },
+    "3rdElement": {
+      "name": "3rdElement",
+      "type": "element",
+      "group": "unesco",
+      "label": "Wow label",
+      "metadata": {
+        "icon": {
+          "small": null,
+          "large": null
+        },
+        "description": "Wow desc",
+        "list": "LR",
+        "year": null,
+        "multinational": "EN",
+        "link": null,
+        "images": [
+          {
+            "url": null,
+            "copyright": null,
+            "title": null
+          }
+        ],
+        "videos": null,
+        "sustainability": null
+      },
+      "all_linked_node": [
+        "test_name1"
+      ]
+    },
+    "another_test": {
+      "name": "another_test",
+      "type": "element",
+      "group": "unesco",
+      "label": "Test !",
+      "metadata": {
+        "icon": {
+          "small": null,
+          "large": null
+        },
+        "description": "description !!!",
+        "list": "LR",
+        "year": null,
+        "multinational": "EN",
+        "link": "http://google.com",
+        "images": [
+          {
+            "url": null,
+            "copyright": null,
+            "title": null
+          }
+        ],
+        "videos": null,
+        "sustainability": null
+      },
+      "all_linked_node": [
+        "test_name1",
+        "test_name2"
       ]
     }
   },
@@ -66,6 +125,24 @@
       "subject": "test_name1",
       "predicate": "related",
       "object": "test_name2",
+      "weight": 2
+    },
+    {
+      "subject": "test_name1",
+      "predicate": "related",
+      "object": "3rdElement",
+      "weight": 2
+    },
+    {
+      "subject": "test_name1",
+      "predicate": "related",
+      "object": "another_test",
+      "weight": 2
+    },
+    {
+      "subject": "test_name2",
+      "predicate": "related",
+      "object": "another_test",
       "weight": 2
     }
   ]
